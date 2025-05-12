@@ -1,0 +1,47 @@
+Proceso tornii
+	Definir numcodigo, mayorerror, menorerror, contadorlote, acumfallas, errorabs, i, medesper, medtor, mayorerrorabs, guardarnmenor, guardarnmayor Como Entero;
+	Definir conttlotes, acumfallastt, porcmenor, porcmayor, totaltornillos Como Real;
+	conttlotes <- 0;
+	acumfallastt <- 0;
+	Escribir 'ingresar el numero de lote ( 0 para finalizar';
+	Leer numcodigo;
+	porcmenor <- 11;
+	porcmayor <- -1;
+	Mientras numcodigo<>0 Hacer
+		acumfallas <- 0;
+		mayorerrorabs <- 0;
+		conttlotes <- conttlotes+1;
+		Escribir 'ingresar la medida esperada en mm';
+		Leer medesper;
+		Para i<-1 Hasta 10 Hacer
+			errorabs <- 0;
+			Escribir 'ingrese la medida del tornillo ', i, ' en mm';
+			Leer medtor;
+			errorabs <- abs(medesper-medtor);
+			Si errorabs<>0 Entonces
+				acumfallas <- acumfallas+1;
+			FinSi
+			Si errorabs>mayorerrorabs Entonces
+				mayorerrorabs <- errorabs;
+			FinSi
+		FinPara
+		Escribir 'el mayor error absoluto fue:', mayorerrorabs;
+		Escribir 'el porcentaje de productos con fallas fue del:%', (acumfallas/10)*100;
+		acumfallastt <- acumfallastt+acumfallas;
+		Si acumfallas<porcmenor Entonces
+			porcmenor <- acumfallas;
+			guardarnmenor <- numcodigo;
+		FinSi
+		Si acumfallas>porcmayor Entonces
+			porcmayor <- acumfallas;
+			guardarnmayor <- numcodigo;
+		FinSi
+		Escribir 'ingresar el numero del siguiente lote ( 0 para finalizar)';
+		Leer numcodigo;
+	FinMientras
+	totaltornillos <- (conttlotes*10);
+	Escribir 'la cantidad de lotes porcesados fueron:', conttlotes;
+	Escribir 'el porcentaje de fallas de todos los lotes fue:', (totaltornillos/acumttfallas)*100;
+	Escribir 'el lote con menor fallas ', porcmenor, ' fue:', guardarnmenor;
+	Escribir 'el lote con mayor fallas ', porcmayor, ' fue:', guardarnmayor;
+FinProceso
